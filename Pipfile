@@ -4,6 +4,9 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+flake8 = "*"
+pycodestyle = "*"
+pylint = "*"
 
 [packages]
 numpy = "*"
@@ -16,6 +19,7 @@ numba = "*"
 scipy = "*"
 umap-learn = "*"
 jupytext = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"
