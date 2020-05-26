@@ -56,17 +56,17 @@ def custom_svd(matrix: Matrix, n_components: int = None, **kwargs) -> SVD:
         eigval, eigvec = np.linalg.eig(a)
         return eigvec, eigval
 
-    A = np.copy(matrix)                         # OK
-    n, m = A.shape                              # OK
-    C = A.T @ A                                 # OK
-    eigvec, eigval = _evd(C)                    # OK
+    A = np.copy(matrix)
+    n, m = A.shape
+    C = A.T @ A
+    eigvec, eigval = _evd(C)
 
     # SIGM
     eigvec = eigvec[:, np.argsort(-eigval)]
-    eigval = eigval[np.argsort(-eigval)]        # SORT
-    eigval = eigval[eigval != 0]                # DELETE ZEROS
-    eigval = np.sqrt(eigval)                    # SQRT
-    SIGM = np.diag(eigval)                      # SIGM
+    eigval = eigval[np.argsort(-eigval)]
+    eigval = eigval[eigval != 0]
+    eigval = np.sqrt(eigval)
+    SIGM = np.diag(eigval)
 
     # V
     V = eigvec
@@ -78,7 +78,8 @@ def custom_svd(matrix: Matrix, n_components: int = None, **kwargs) -> SVD:
 
     # OUTPUT
     SIGM = _pad_matrix(SIGM, n, m)
-    return U[:, :n_components], SIGM[:n_components, :n_components], V.T[:n_components]
+    return U[:, :n_components], SIGM[:n_components, :n_components], \
+        V.T[:n_components]
 
 
 def compress_layer(matrix: Matrix, method: Callable, n_components: int
